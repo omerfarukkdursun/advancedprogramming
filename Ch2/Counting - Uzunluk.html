@@ -1,0 +1,26 @@
+<body>
+
+Inch
+<input type=number id=inch value=0 oninput="ic(this.value)"
+onchange="ic(this.value)">
+
+Cm
+<input type="number" id="cm" value=0 oninput="ci(this.value)"
+onchange="ci(this.value)">
+
+
+
+
+<script>
+
+function ic(value){
+    document.getElementById('cm').value = (value/0.39370).toFixed(1);
+}
+
+function ci(value){
+    document.getElementById('inch').value = (value*0.39370).toFixed(1);
+}
+
+</script>
+
+</body>
