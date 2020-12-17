@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<title>Memory Game</title>
+<html>
+<head>
+ 
+ <h1> Memory Game</h1>
+
+<style>
+
+
+div#memory_board{
+	
+	background-color:powderblue;
+	width:370px;
+	height:550px;
+	
+	
+}
+
+h1{
+	border-bottom:5px solid #9faf41;
+    padding-left: 85px;
+    color: orange;
+    width:284px;
+}
+
+h1 span{
+	
+	
+	background-color:#111;
+	margin-left:10px;
+	margin-top:-15px;
+	display:block;
+	font-size:20px
+    
+}
+
+
+div#memory_board > div{
+	
+	border:#000 1px solid;
+	width:30px;
+	height:30px;
+	float:left;
+	margin:10px;
+	padding:20px;
+	font-size:62px;
+	cursor:pointer;
+	text-align:center;
+}
+
+</style>
+<script>
+
+var harfliste = ['A','A','B','B','C','C','D','D','E','E','F','F','G','G','H','H','I','I','J','J','K','K','L','L'];
+var memory_degerler =[];
+var memory_tile_ids =[];
+var x = 0;
+
+Array.prototype.memory_tile_shuffle = function () {
+    var i = this.length, j, temp;
+    while(--i > 0){
+        j = Math.floor(Math.random() * (i+1));
+        temp = this[j];
+        this[j] = this[i];
+        this[i] = temp;
+    }
+}
+function ekran(){
+	x = 0;
+	var cikti = '';
+	harfliste.memory_tile_shuffle();
+
+	for (var i = 0; i < harfliste.length; i++) {
+	    cikti += '<div id="tile_' + i + '" onclick="bos(this,\'' + harfliste[i] + '\')"></div>';
+	}
+	document.getElementById('memory_board').innerHTML = cikti;
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div id="memory_board"></div>
+
+<script>ekran();</script>
+
+
+</body>
+
+</html>
