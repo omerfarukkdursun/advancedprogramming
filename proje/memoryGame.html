@@ -6,7 +6,7 @@
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" sizes="192x192" href="proje/m.jpeg">
+	<link rel="icon" sizes="192x192" href="m.jpeg">
 	<h1> Memory Game</h1>
 
 	<style>
@@ -41,7 +41,7 @@
 
 			background-color: #f9e0ae;
 			width: 370px;
-			height: 550px;
+			height: 180px;
            padding: 10px 10px 10px 10px;
             border: 2px solid green;
             border-radius: 10px;
@@ -56,6 +56,9 @@
 		.button1 {
 			margin-left: 5px;
 			margin-bottom: 8px;
+
+
+			
 			background-color: #f9e0ae;
 			/* Green */
 			border: 2px solid gray;
@@ -75,19 +78,7 @@
 		}
 
         
-        .button1:focus{
-            background-color: #4CAF50;
-            color: #f9e0ae;
-        }
-        .button2:focus{
-            background-color: orange;
-            color: #f9e0ae;
-        }
-        .button3:focus{
-            background-color: red;
-            color: #f9e0ae;
-        }
-        
+    
         
         
 
@@ -152,8 +143,50 @@
 			display: block;
 			font-size: 20px
 		}
+		div.bitis {
+			width: 350px;
+			margin-top: 10px;
+            border-radius: 5px;
+            padding-top: 0px;
+            padding-bottom: 5px;
+            padding-left: 20px;
+            padding-right: 20px;
+			font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+
+			color: orange;
+            font-weight: 600;
+			
+            text-align: center;	
 
 
+		}
+
+		button.tekrar{
+
+			
+            border-radius: 5px;
+            padding-top: 0px;
+            padding-bottom: 5px;
+            padding-left: 20px;
+            padding-right: 20px;
+			font-size: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+
+			color: orange;
+            font-weight: 600;
+			
+            text-align: center;	
+			border: 2px solid green;
+			background: #f9e0ae;
+		    margin-left: 50px;
+
+
+
+
+		}
 		div#memory_board>div {
 
 			border: #000 1px solid;
@@ -182,10 +215,10 @@
 
 	<script>
 
-		var harfliste = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H', 'I', 'I', 'J', 'J', 'K', 'K', 'L', 'L'];
+		var harfliste = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D'];
 		var harflisteKolay = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D'];
 		var harflisteOrta = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H'];
-		var harflisteZor = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H', 'I', 'I', 'J', 'J', 'K', 'K', 'L', 'L'];
+		var harflisteZor = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H', 'I', 'I', 'J', 'J'];
 		var memory_degerler = [];
 		var memory_tile_ids = [];
 		var x = 0;
@@ -235,11 +268,16 @@
 						memory_tile_ids = [];
 						// Check to see if the whole board is cleared
 						if (x == harfliste.length) { // Tüm kutular açıldıysa yani x in uzunluğu listeye eşitlendiyse oyun bitmiştir.
-							alert("Yeni Oyun İçin Tıklayınız"+deneme+" Denemede Oyunu Kazandınız TEBRİKLER!! ");
+							
+							document.getElementById('bitis').innerText = deneme + " Denemede Oyunu Kazandınız TEBRİKLER!!";
 							deneme=0;
-							document.getElementById('memory_board').innerHTML = "";
+							document.getElementById('bitis').style.background = '#f9e0ae';
+							document.getElementById('bitis').style.border = '2px solid green';
+							
+			
+							
 							document.getElementById('denemeSayisi').innerText='denemesayisi: '+deneme;
-							ekran();
+							
 						}
 					} else {
 						function flip2Back() { //Hatalı durumlarda kutuları kapar.
@@ -262,6 +300,15 @@
 			}
 		}
 		function kolayF() {
+			document.getElementById('kolay').style.background = '#4CAF50';
+			document.getElementById('kolay').style.color = '#f9e0ae';
+
+			document.getElementById('orta').style.background = '#f9e0ae';
+			document.getElementById('orta').style.color = 'orange';
+
+			document.getElementById('zor').style.background = '#f9e0ae';
+			document.getElementById('zor').style.color = 'red';
+            
 			
 			deneme=0;
 			harfliste = harflisteKolay;
@@ -273,6 +320,16 @@
 
 		}
 		function ortaF() {
+			document.getElementById('kolay').style.background = '#f9e0ae';
+			document.getElementById('kolay').style.color = '#4CAF50';
+
+			document.getElementById('orta').style.background = 'orange';
+			document.getElementById('orta').style.color = '#f9e0ae';
+
+			document.getElementById('zor').style.background = '#f9e0ae';
+			document.getElementById('zor').style.color = 'red';
+
+		
 			
 			deneme=0;
 			harfliste = harflisteOrta;
@@ -282,14 +339,42 @@
 
 		}
 		function zorF() {
+			document.getElementById('kolay').style.background = '#f9e0ae';
+			document.getElementById('kolay').style.color = '#4CAF50';
+
+			document.getElementById('orta').style.background = '#f9e0ae';
+			document.getElementById('orta').style.color = 'orange';
+
+			document.getElementById('zor').style.background = 'red';
+			document.getElementById('zor').style.color = '#f9e0ae';
+
+			
 			
 			deneme=0;
 			harfliste = harflisteZor;
-			document.getElementById('memory_board').style.height = '550px';
+			document.getElementById('memory_board').style.height = '465px';
 			document.getElementById('denemeSayisi').innerText='denemesayisi: '+deneme;
 			ekran();
 
 		}
+	
+
+
+	function tekrar(){
+
+		ekran();
+		deneme=0;
+		document.getElementById('denemeSayisi').innerText='denemesayisi: '+deneme;
+
+		document.getElementById('bitis').innerText = " ";
+		
+		document.getElementById('bitis').style.background = '';
+		document.getElementById('bitis').style.border = '';
+		
+
+
+	}
+
 	</script>
 
 </head>
@@ -300,18 +385,27 @@
 		<button  id='orta' class="button2" onclick=ortaF()> Orta </button>
 		<button id='zor' class="button3" onclick=zorF()> Zor </button>
     </div>
-    
    
-        <div id="memory_board"></div>
-        <script>ekran();</script>
+        <div id="memory_board">	
 
-  
-    
-    
+		</div>
+        <script>ekran();kolayF();</script>
+
     
         <span id="denemeSayisi" class="deneme">
             Deneme Sayısı:0
-        </span>
+		</span>
+
+		<button id="tekrar" class="tekrar" onclick=tekrar()>
+			Tekrar Oyna
+
+		</button>
+		
+	<div id='bitis' class="bitis">
+
+
+
+	</div>
 
     
 
