@@ -1,445 +1,104 @@
-
-
 <!DOCTYPE html>
-<title>Memory Game</title>
-<html>
-
+<html lang="en">
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width">
-	<link rel="icon" sizes="192x192" href="m.jpg">
-	<h1> Memory Game</h1>
-
-	<style>
-        body{
-            background: #c24914;
-        }
-		span.deneme{
-          
-            
-            border: 2px solid green;
-            border-radius: 5px;
-            padding-top: 0px;
-            padding-bottom: 5px;
-            padding-left: 20px;
-            padding-right: 20px;
-			font-size: 20px;
-            font-family: 'Times New Roman', Times, serif;
-            font-style: italic;
-
-			color: orange;
-            font-weight: 600;
-			
-            text-align: center;	
-            background: #f9e0ae;		
-
-
-
-		}
-
-
-		div#memory_board {
-
-			background-color: #f9e0ae;
-			width: 370px;
-			height: 180px;
-           padding: 10px 10px 10px 10px;
-            border: 2px solid green;
-            border-radius: 10px;
-            margin-bottom: 5px;
-
-
-		}
-
-
-
-
-		.button1 {
-			margin-left: 5px;
-			margin-bottom: 8px;
-
-
-			
-			background-color: #f9e0ae;
-			/* Green */
-			border: 2px solid gray;
-            border-radius: 8px;
-			color: #4CAF50;
-			padding: 8px 20px;
-            font-weight: 600;
-            font-style: italic;
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 15px;
-            outline: none;
-			
-
-			cursor: pointer;
-		}
-
-        
-    
-        
-        
-
-		.button2 {
-			margin-left: 5px;
-			margin-bottom: 8px;
-			background-color: #f9e0ae;
-			border: 2px solid gray;
-            border-radius: 8px;
-            font-style: italic;
-			color: orange;
-            font-weight: 600;
-			padding: 8px 20px;
-			text-align: center;
-            outline: none;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 15px;
-			
-
-			cursor: pointer;
-
-		}
-
-		.button3 {
-			margin-left: 5px;
-			margin-bottom: 8px;
-			background-color: #f9e0ae;
-			/* Green */
-			border: 2px solid gray;
-            font-style: italic;
-            border-radius: 8px;
-            font-weight: 600;
-			color: red;
-			padding: 8px 20px;
-			text-align: center;
-            outline: none;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 15px;
-			
-
-			cursor: pointer;
-		}
-
-		h1 {
-			border: 2px solid green;
-            font-style: italic;
-            border-radius: 10px;
-			padding-left: 85px;
-			color: orange;
-			width: 284px;
-            background: #f9e0ae;
-		}
-
-		h1 span {
-
-
-			background-color: #111;
-			margin-left: 10px;
-			margin-top: -10px;
-			display: block;
-			font-size: 20px
-		}
-		div.bitis {
-			width: 350px;
-			margin-top: 10px;
-            border-radius: 5px;
-            padding-top: 0px;
-            padding-bottom: 5px;
-            padding-left: 20px;
-            padding-right: 20px;
-			font-size: 20px;
-            font-family: 'Times New Roman', Times, serif;
-            font-style: italic;
-
-			color: orange;
-            font-weight: 600;
-			
-            text-align: center;	
-
-
-		}
-
-		button.tekrar{
-
-			
-            border-radius: 5px;
-            padding-top: 0px;
-            padding-bottom: 5px;
-            padding-left: 20px;
-            padding-right: 20px;
-			font-size: 20px;
-            font-family: 'Times New Roman', Times, serif;
-            font-style: italic;
-
-			color: orange;
-            font-weight: 600;
-			
-            text-align: center;	
-			border: 2px solid green;
-			background: #f9e0ae;
-		    margin-left:5px;
-
-
-
-
-		}
-		div#memory_board>div {
-
-			border: #000 1px solid;
-			width: 30px;
-			height: 30px;
-			float: left;
-			margin: 10px;
-			padding: 20px;
-			font-size: 40px;
-			cursor: pointer;
-			text-align: center;
-		}
-        .buttons{
-            padding-left: 70px;
-        }
-        .bigScreen{
-            width: 400px;
-        }
-
-        @media  (max-width: 500px) {
-  body {
-    background-color: #c24914;
-  }
-}
-	</style>
-
-	<script>
-
-		var harfliste = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D'];
-		var harflisteKolay = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D'];
-		var harflisteOrta = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H'];
-		var harflisteZor = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H', 'I', 'I', 'J', 'J'];
-		var memory_degerler = [];
-		var memory_tile_ids = [];
-		var x = 0;
-
-		Array.prototype.m = function () { //random harfleri diziyor.
-			var i = this.length, j, temp;
-			while (--i > 0) {
-				j = Math.floor(Math.random() * (i + 1));
-				temp = this[j];
-				this[j] = this[i];
-				this[i] = temp;
-			}
-		}
-		function ekran() { //her harf için bir div oluşturuyo.
-			
-			x = 0;
-			var cikti = '';
-			harfliste.m();
-			for (var i = 0; i < harfliste.length; i++) {
-				cikti += '<div id="tile_' + i + '" onclick="hafıza(this,\'' + harfliste[i] + '\')"></div>';
-			}
-			document.getElementById('memory_board').innerHTML = cikti;
-		}
-		var deneme=0;
-		function hafıza(tile, val) {
-			if (tile.innerHTML == "" && memory_degerler.length < 2) { //Kutuyu açıp açmadığımız kontrol edilir. 2 den küçüksek açtıklarımız ife girer.
-				tile.style.background = '#FFF';
-				tile.innerHTML = val;
-				deneme++;
-				document.getElementById('denemeSayisi').innerText='denemesayisi: '+deneme;
-				if (memory_degerler.length == 0) { // Hiç kutu açmadıysak buraya girer ve memory değerlerin ilkine ilk açtığımızı atar. Aynı zamanda id yi de push ediyor.
-					memory_degerler.push(val);
-					memory_tile_ids.push(tile.id);
-				} else if (memory_degerler.length == 1) {// Eğer bir tane doluysa buraya girer.
-					memory_degerler.push(val);
-					memory_tile_ids.push(tile.id);
-					if (memory_degerler[0] == memory_degerler[1]) {// İlk girilen değerle ikinci girilen değeri kontrol ediyor. 
-						x += 2;
-
-						var tile_1 = document.getElementById(memory_tile_ids[0]);
-						var tile_2 = document.getElementById(memory_tile_ids[1]);
-						tile_1.style.background = '#9faf41';
-						tile_2.style.background = '#9faf41';
-
-						// Arrayleri temizledik.
-						memory_degerler = [];
-						memory_tile_ids = [];
-						// Check to see if the whole board is cleared
-						if (x == harfliste.length) { // Tüm kutular açıldıysa yani x in uzunluğu listeye eşitlendiyse oyun bitmiştir.
-							
-							document.getElementById('bitis').innerText = deneme + " Denemede Oyunu Kazandınız TEBRİKLER!!";
-							
-							document.getElementById('bitis').style.background = '#f9e0ae';
-							document.getElementById('bitis').style.border = '2px solid green';
-							
-			
-							
-							document.getElementById('denemeSayisi').innerText='denemesayisi: '+deneme;
-							
-						}
-					} else {
-						function flip2Back() { //Hatalı durumlarda kutuları kapar.
-							// Flip the 2 tiles back over
-							var tile_1 = document.getElementById(memory_tile_ids[0]);
-							var tile_2 = document.getElementById(memory_tile_ids[1]);
-							
-							tile_1.innerHTML = "";
-							
-							tile_2.innerHTML = "";
-							tile_1.style.background = '#f9e0ae';
-						    tile_2.style.background = '#f9e0ae';
-							// Clear both arrays
-							memory_degerler = [];
-							memory_tile_ids = [];
-						}
-						setTimeout(flip2Back, 700); // 700 salise bekleyip öyle kutuları öyle kapar.
-					}
-				}
-			}
-		}
-		function kolayF() {
-
-
-			
-			
-
-
-			document.getElementById('kolay').style.background = '#4CAF50';
-			document.getElementById('kolay').style.color = '#f9e0ae';
-
-			document.getElementById('orta').style.background = '#f9e0ae';
-			document.getElementById('orta').style.color = 'orange';
-
-			document.getElementById('zor').style.background = '#f9e0ae';
-			document.getElementById('zor').style.color = 'red';
-            
-			
-			deneme=0;
-			harfliste = harflisteKolay;
-            document.getElementById('memory_board').style.height = '180px';
-            
-			document.getElementById('denemeSayisi').innerText='denemesayisi: '+deneme;
-			ekran();
-
-
-		}
-		function ortaF() {
-			document.getElementById('bitis').innerText = " ";
-		
-			document.getElementById('bitis').style.background = '';
-			document.getElementById('bitis').style.border = '';
-
-
-			document.getElementById('kolay').style.background = '#f9e0ae';
-			document.getElementById('kolay').style.color = '#4CAF50';
-
-			document.getElementById('orta').style.background = 'orange';
-			document.getElementById('orta').style.color = '#f9e0ae';
-
-			document.getElementById('zor').style.background = '#f9e0ae';
-			document.getElementById('zor').style.color = 'red';
-
-		
-			
-			deneme=0;
-			harfliste = harflisteOrta;
-			document.getElementById('memory_board').style.height = '360px';
-			document.getElementById('denemeSayisi').innerText='denemesayisi: '+deneme;
-			ekran();
-
-		}
-		function zorF() {
-			document.getElementById('bitis').innerText = " ";
-		
-			document.getElementById('bitis').style.background = '';
-			document.getElementById('bitis').style.border = '';
-
-
-			document.getElementById('kolay').style.background = '#f9e0ae';
-			document.getElementById('kolay').style.color = '#4CAF50';
-
-			document.getElementById('orta').style.background = '#f9e0ae';
-			document.getElementById('orta').style.color = 'orange';
-
-			document.getElementById('zor').style.background = 'red';
-			document.getElementById('zor').style.color = '#f9e0ae';
-
-			
-			
-			deneme=0;
-			harfliste = harflisteZor;
-			document.getElementById('memory_board').style.height = '465px';
-			document.getElementById('denemeSayisi').innerText='denemesayisi: '+deneme;
-			ekran();
-
-		}
-	
-
-
-	function tekrar(){
-
-		ekran();
-		deneme=0;
-		document.getElementById('denemeSayisi').innerText='denemesayisi: '+deneme;
-
-		document.getElementById('bitis').innerText = " ";
-		
-		document.getElementById('bitis').style.background = '';
-		document.getElementById('bitis').style.border = '';
-		
-
-
-	}
-
-	</script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" sizes="192x192" href="m.jpg">
 </head>
 
+<style>
+    body{
+        background:#c24914;
+    }
+    .startScreen{
+        margin-top: 0px;
+    width:400px;
+    height: 600px;
+    background:#f9e0ae;
+
+    
+
+}
+
+#playButton{
+
+    border: 2px solid gray;
+    border-radius: 5px;
+background: #f9e0ae;
+    margin-top: 6%;
+    height: 6%;
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+
+}
+
+h1 {
+			border: 4px solid #c24914;
+            border-style: dashed;
+            font-style: italic;
+            border-radius: 10px;
+			margin-left: 25px;
+			margin-right: 25px;
+			color: orange;
+			width: 350px;
+            
+            text-align: center;
+		}
+        .authorDesc{
+            text-align: center;
+            font-style: italic;
+            font-size: 18px;
+            color: orange;
+            border: 4px solid #c24914;;
+            width: 300px;
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-top:30px;
+            border-radius: 10px;
+            border-style: dashed;
+            
+
+
+
+        }
+#playButton{
+    font-size: 20px;
+    font-style: italic;
+    color: orange;
+            border: 4px solid #c24914;
+            border-style: dashed ;
+        }
+
+        a{
+            text-decoration: none;
+            color: orange;
+            font-weight: 500;
+        }
+
+#memoryPng{
+    margin-left: 25px;
+    margin-right: 25px;
+    border: 4px solid #c24914;
+    border-style: dashed;
+    border-radius: 10px;
+    
+}
+</style>
+
+
 <body>
-	<div class="buttons">
-		<button  id='kolay' class="button1" onclick=kolayF()> Kolay </button>
-		<button  id='orta' class="button2" onclick=ortaF()> Orta </button>
-		<button id='zor' class="button3" onclick=zorF()> Zor </button>
+    <div class="startScreen">
+        <h1>Welcome To The Memory Game</h1>
+        <img id="memoryPng" src="memory.png" alt="">
+
+        <button id="playButton"> <a href="start.html">PLAY</a></button>
+
+        <div class="authorDesc">
+            <h3>Made By Ömer Faruk Dursun</h3>
+        </div>
+
     </div>
-   
-        <div id="memory_board">	
-
-		</div>
-        <script>
-
-	
-
-			document.getElementById('kolay').style.background = '#4CAF50';
-			document.getElementById('kolay').style.color = '#f9e0ae';
-			ekran();
-
-
-	</script>
-
-    
-        <span id="denemeSayisi" class="deneme">
-            Deneme Sayısı:0
-		</span>
-
-		<button id="tekrar" class="tekrar" onclick=tekrar()>
-			Tekrar Oyna
-
-		</button>
-		
-	<div id='bitis' class="bitis">
-
-
-
-	</div>
-
-    
-
-
-
-
 </body>
-
 </html>
