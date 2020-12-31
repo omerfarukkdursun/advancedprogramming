@@ -6,6 +6,7 @@
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
 	<link rel="icon" sizes="192x192" href="m.jpg">
 	<h1> Memory Game</h1>
 
@@ -270,7 +271,7 @@
 						if (x == harfliste.length) { // Tüm kutular açıldıysa yani x in uzunluğu listeye eşitlendiyse oyun bitmiştir.
 							
 							document.getElementById('bitis').innerText = deneme + " Denemede Oyunu Kazandınız TEBRİKLER!!";
-							deneme=0;
+							
 							document.getElementById('bitis').style.background = '#f9e0ae';
 							document.getElementById('bitis').style.border = '2px solid green';
 							
@@ -319,7 +320,7 @@
 			deneme=0;
 			harfliste = harflisteKolay;
             document.getElementById('memory_board').style.height = '180px';
-           
+            
 			document.getElementById('denemeSayisi').innerText='denemesayisi: '+deneme;
 			ekran();
 
@@ -407,7 +408,16 @@
         <div id="memory_board">	
 
 		</div>
-        <script>ekran();</script>
+        <script>
+
+	
+
+			document.getElementById('kolay').style.background = '#4CAF50';
+			document.getElementById('kolay').style.color = '#f9e0ae';
+			ekran();
+
+
+	</script>
 
     
         <span id="denemeSayisi" class="deneme">
